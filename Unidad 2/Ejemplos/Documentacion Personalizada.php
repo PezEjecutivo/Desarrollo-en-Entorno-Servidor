@@ -182,3 +182,13 @@ print_r($resultado);
 for ($i = 0; $i < count($resultado); $i++) {
     echo $resultado[$i];
 }
+
+//== == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == ==
+
+//Buscar si un elemento esta en una array
+$ciudades = ["madrid", "jaen", null, "Granada", "Puerto", "Barcelona", "", "Valencia", "madrid", "madrid", "Barcelona"];
+
+//In array nos dice si un texto esta en otro texto, similar a indexof
+$ciudadBuscada = "madrid";
+if (in_array($ciudadBuscada, $ciudades))
+    echo "Madrid esta en el array";
