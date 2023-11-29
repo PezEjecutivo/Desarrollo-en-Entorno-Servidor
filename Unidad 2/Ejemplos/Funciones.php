@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 
 //Sintaxis: strpos(cadena, subcadena, posición_inicial)
@@ -91,20 +91,21 @@ print_r($datosJugad);
 //En esta estructura condicional if, se verifica si el valor de $_SERVER["REQUEST_METHOD"] es igual a "POST". Si es así, 
 //el código dentro del bloque de la condición se ejecutará. Esto significa que el código dentro de las llaves {} se ejecutará 
 //solo si la solicitud HTTP es de tipo POST.
-if($_SERVER["REQUEST_METHOD"] == "POST"){}
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+}
 
 //== == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == ==
 
 //En esta estructura condicional if, se verifica si el campo "edad" está definido en la solicitud POST. La función isset() 
 //se utiliza para determinar si una variable está definida y no es nula. Si $_POST["edad"] está definido, es decir, si existe 
 //y no es nulo, el código dentro del bloque de la condición se ejecutará.
-if(isset($_POST["edad"]))
+if (isset($_POST["edad"]))
 
-//== == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == ==
+    //== == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == ==
 
-//La función new DateTime() crea un nuevo objeto de la clase DateTime que representa la fecha y hora actuales. 
-//El objeto $hoy contendrá la fecha y hora actual en el momento en que se ejecuta esta línea de código.
-$hoy = new DateTime();
+    //La función new DateTime() crea un nuevo objeto de la clase DateTime que representa la fecha y hora actuales. 
+    //El objeto $hoy contendrá la fecha y hora actual en el momento en que se ejecuta esta línea de código.
+    $hoy = new DateTime();
 
 //== == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == ==
 
@@ -138,4 +139,46 @@ $faltaSemanaSanta = $hoy->diff($semanaSanta);
 //para obtener un timestamp de Unix a partir de la cadena de fecha $fecha_modificada.
 
 $dia_semana = date('N', strtotime($fecha_modificada));
-?>
+
+
+//== == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == ==
+
+
+//Funcion explode a mano
+
+//Necesitamos las variables delimitadoras y la frase
+$separador = ",";
+$frase = "Hola, Piolin, como estas?, espero que bien";
+
+//Creamos el array que utilizamos para guardar las cosas
+$resultado = [];
+//Creamos la variable que guarda el valor
+$valorActual = '';
+
+//Hacemos un for que sea del tamaño de la frase
+for ($i = 0; $i < strlen($frase); $i++) {
+
+    // Si encontramos el delimitador, agregamos la subcadena actual al resultado
+    if ($frase[$i] == $separador) {
+
+        $resultado[] = $valorActual;
+        // Reiniciamos la subcadena actual
+        $valorActual = '';
+    } else {
+        // Si no es el delimitador, agregamos el carácter a la subcadena actual
+        $valorActual .= $frase[$i];
+    }
+}
+
+// Agregamos la última subcadena después del último delimitador (o toda la cadena si no hay delimitador)
+// Porque al no encontrar delimitador, no entaria al if y por tanto no se guardaria
+$resultado[] = $valorActual;
+
+
+// Imprimir el resultado con print_r();
+print_r($resultado);
+
+// Imprimir el resultado con echo
+for ($i = 0; $i < count($resultado); $i++) {
+    echo $resultado[$i];
+}
