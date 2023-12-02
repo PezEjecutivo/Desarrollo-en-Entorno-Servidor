@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ejercicio 5</title>
 </head>
+
 <body>
     <form action="" method="post">
         <label for="numeros">Introduce una cadena de numeros</label>
@@ -12,43 +14,43 @@
         <input type="submit" value="Enviar">
     </form>
 
-    <?php 
-    if($_SERVER["REQUEST_METHOD"]=="POST"){
+    <?php
+    error_reporting(E_ERROR | E_PARSE);
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
         //Sin funciones funciones
         $numeros = $_POST["numeros"];
         $posicion = 0;
         //Creamos nuestro propio explode
-        for($i=0;$i<strlen($numeros); $i++){
-          
-          if($numeros[$i]!=" "){
-              $numerosSeparados[$posicion] = $numerosSeparados[$posicion] . $numeros[$i];
-          }else{
-              $posicion++;
-          }
+        for ($i = 0; $i < strlen($numeros); $i++) {
+
+            if ($numeros[$i] != " ") {
+                $numerosSeparados[$posicion] = $numerosSeparados[$posicion] . $numeros[$i];
+            } else {
+                $posicion++;
+            }
         }
         $nprimos = 0;
         $minimo = PHP_INT_MAX;
-        for($i=0; $i<count($numerosSeparados); $i++){
-            if($numerosSeparados[$i]< $minimo){
-                $minimo= $numerosSeparados[$i];
-
+        for ($i = 0; $i < count($numerosSeparados); $i++) {
+            if ($numerosSeparados[$i] < $minimo) {
+                $minimo = $numerosSeparados[$i];
             }
         }
-        $media =0;
-        for($i =0; $i<count($numerosSeparados); $i++){
-            $media = $media+$numerosSeparados[$i];
+        $media = 0;
+        for ($i = 0; $i < count($numerosSeparados); $i++) {
+            $media = $media + $numerosSeparados[$i];
             $esPrimo = true;
-            for($j =2; $j<$numerosSeparados[$i]; $j++){
-                
-                if($numerosSeparados[$i]%$j==0){
-                    $esPrimo=false;
+            for ($j = 2; $j < $numerosSeparados[$i]; $j++) {
+
+                if ($numerosSeparados[$i] % $j == 0) {
+                    $esPrimo = false;
                 }
             }
-            if($esPrimo){
+            if ($esPrimo) {
                 $nprimos++;
             }
         }
-        $media = $media/count($numerosSeparados);
+        $media = $media / count($numerosSeparados);
         $arrayNumeros = [
             "nprimos" => $nprimos,
             "media" => $media,
@@ -72,9 +74,10 @@
         echo "        <td>nprimos</td>";
         echo "        <td>" . $arrayNumeros["nprimos"] . "</td>";
         echo "    </tr>";
-        echo "</table>";         
-        }
+        echo "</table>";
+    }
 
     ?>
 </body>
+
 </html>
