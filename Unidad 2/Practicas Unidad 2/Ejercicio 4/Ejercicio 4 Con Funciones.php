@@ -38,7 +38,6 @@
       //Creamos una variable con todas las consonantes para comprobar las consonantes
       $consonantes = ["q", "w", "r", "t", "y", "p", "s", "d", "f", "g", "h", "j", "k", "l", "ñ", "z", "x", "c", "v", "b", "n", "m"];
       $cantConsonantes = 0;
-      $letras = 0;
 
       //Hacemos un bucle que vaya por cada palabra separada
       for ($i = 0; $i < count($palabrasSeparadas); $i++) {

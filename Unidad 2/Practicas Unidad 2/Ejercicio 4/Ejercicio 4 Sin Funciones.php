@@ -28,6 +28,7 @@
 
 
     <?php
+    //Para que no aparezcan warnings
     error_reporting(E_ERROR | E_PARSE);
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
       //Con funciones
