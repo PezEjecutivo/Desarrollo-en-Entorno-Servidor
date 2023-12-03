@@ -17,8 +17,6 @@
                 <textarea class="form-control" style="height:5vh" placeholder="Introduce tu codigo..." name="menu"></textarea>
             </div>
 
-            <p><a style="color: black" href="">hola</a></p>
-
             <?php
             for ($i = 0; $i < 4; $i++) {
                 for ($j = 0; $j < 4; $j++) {

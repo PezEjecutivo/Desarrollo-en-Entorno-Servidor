@@ -138,6 +138,45 @@
     }
     echo "</header>";
 
+    $maximoAncho = 0;
+    $ancho = 0;
+    $maximoAltura = 0;
+    for ($i = 0; $i < 4; $i++) {
+        for ($j = 0; $j < 4; $j++) {
+            $temporal = $_POST["grid$i$j"];
+            if ($temporal == "on") {
+                $ancho++;
+            }
+        }
+        if ($ancho >= 1) {
+            $maximoAltura++;
+        }
+        if ($maximoAncho < $ancho) {
+            $maximoAncho = $ancho;
+        }
+        $ancho = 0;
+    }
+
+
+    echo "<table border=\"1\">";
+    for ($i = 0; $i < $maximoAltura; $i++) {
+        echo "<tr>";
+        for ($j = 0; $j < $maximoAncho; $j++) {
+            $color = "";
+            if ($_POST["grid$i$j"] == "on") {
+                $color = "background-color: gold;";
+            }
+            echo "<td style=\"border: 1px solid black; padding: 5px; $color\" >";
+            if ($_POST["grid$i$j"] == "on") {
+                echo "<p>Activastes este boton</p>";
+            }
+            echo "</td>";
+        }
+        echo "</tr>";
+    }
+    echo "</table>";
+
+
     echo "<footer style=\"background-color: green;\">";
     for ($i = 0; $i <= count($footer); $i++) {
         echo "<h1>";
