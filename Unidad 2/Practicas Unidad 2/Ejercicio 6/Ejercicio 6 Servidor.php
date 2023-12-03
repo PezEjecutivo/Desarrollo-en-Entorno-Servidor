@@ -13,10 +13,13 @@
 
     <?php
 
+    //incluimos el archivo
     include("./funciones-html.php");
 
+    //Ejecutamos la funcion con esos valores
     crearTabla($_POST["color"], $_POST["columnas"], $_POST["filas"]);
 
+    //Si el checkbox esta pulsado, ejecutamos la funcion
     if (isset($_POST["edad"])) {
         crearEdad();
     }

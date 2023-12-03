@@ -23,40 +23,53 @@
         //Creamos nuestro propio explode
         for ($i = 0; $i < strlen($numeros); $i++) {
 
+            //Si el caracter no es un espacio
             if ($numeros[$i] != " ") {
+                //Concatenamos el caracter actual con el valor del array
+                //Podriamos pensar que como son numeros deberias sumarlos pero no
+                //Si lo sumamos 13 se convertiria en 4, por lo que hay que concatenarlo
+                //al ir caracter por caracter
                 $numerosSeparados[$posicion] = $numerosSeparados[$posicion] . $numeros[$i];
             } else {
+                //Si el caracter es un espacio, aumetanmos el indice
                 $posicion++;
             }
         }
         $nprimos = 0;
+        //Ponemos el maximo valor posible al minimo
         $minimo = PHP_INT_MAX;
-        for ($i = 0; $i < count($numerosSeparados); $i++) {
-            if ($numerosSeparados[$i] < $minimo) {
-                $minimo = $numerosSeparados[$i];
-            }
-        }
         $media = 0;
+        //Hacemos un bucle para comprobar las cosas
         for ($i = 0; $i < count($numerosSeparados); $i++) {
+            //Sumamos todos los numeros
             $media = $media + $numerosSeparados[$i];
             $esPrimo = true;
             for ($j = 2; $j < $numerosSeparados[$i]; $j++) {
-
+                //Comprobamos si no es primo
                 if ($numerosSeparados[$i] % $j == 0) {
                     $esPrimo = false;
                 }
             }
+            //Si es primo sumamos 1
             if ($esPrimo) {
                 $nprimos++;
             }
+            //Comprobamos el numero actual con el minimo
+            //Si el minimo es mayor, lo igualamos al numero actual
+            if ($numerosSeparados[$i] < $minimo) {
+                $minimo = $numerosSeparados[$i];
+            }
         }
+        //dividimos la media por la cantidad de numeros en el array
         $media = $media / count($numerosSeparados);
+        //Creamos el array asociativo
         $arrayNumeros = [
             "nprimos" => $nprimos,
             "media" => $media,
             "minimo" => $minimo
         ];
 
+        //Como en este caso no hay una funcion, ponemos este orden
         echo "<table>";
         echo "    <tr>";
         echo "        <th>Nombre</th>";

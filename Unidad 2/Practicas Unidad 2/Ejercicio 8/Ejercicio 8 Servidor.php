@@ -10,6 +10,7 @@
 </head>
 
 <body>
+    <!--Ponemos un poco de estilo ya que nos pide que este bonito-->
     <style>
         body {
             margin: 0;
@@ -38,12 +39,15 @@
         }
     </style>
     <?php
-    //[S-Menu superior/I-Menu inferior][orden del menu]-[nombre menu]-[Color Letra]-[url destino]
+    //Quitamos los warnings, ya que funciona adecuadamente pero aparecen
     error_reporting(E_ERROR | E_PARSE);
 
+    //Recibimos los datos del formulario
     $codigos = $_POST["menu"];
 
+    //Lo separamos por linea
     $menus = explode("\n", $codigos);
+    //Creamos todas las variables
     $header = [];
     $footer = [];
     $ordenHeader = [];
@@ -55,53 +59,49 @@
     $contadorHeader = 0;
     $contadorFooter = 0;
 
+    //Hacemos un foreach para recorrer cada linea
     foreach ($menus as $menu) {
 
-
+        //Separamos los datos del menu con el -
         $datosMenu = explode("-", $menu);
-        //$palabrasSeparadas[$posicion] = isset($palabrasSeparadas[$posicion])
+
+        //Si empieza por S, los datos iran para el header
         if ($datosMenu[0][0] == "S") {
 
-
-            $header[$contadorHeader] = isset($header[$contador]);
+            //Anadimos el nombre del menu 
             $header[$contadorHeader] = ($datosMenu[1]);
-
-
-            $colorHeader[$contadorHeader] = isset($colorHeader[$contador]);
+            //Añadimos el color del menu
             $colorHeader[$contadorHeader] = ($datosMenu[2]);
-
-
-            $urlHeader[$contadorHeader] = isset($urlHeader[$contador]);
+            //Añadimos el url del menu
             $urlHeader[$contadorHeader] = ($datosMenu[3]);
-
-
-            $ordenHeader[$contadorHeader] = isset($ordenHeader[$contador]);
+            //Añadimos el orden del array
             $ordenHeader[$contadorHeader] = $datosMenu[0][1];
 
+            //Aumentamos el indice del menu
             $contadorHeader++;
+            //Si empieza por I iran para el footer
         } else if ($datosMenu[0][0] == "I") {
 
-            $footer[$contadorFooter] = isset($footer[$contador]);
+            //Anadimos el nombre del menu
             $footer[$contadorFooter] = ($datosMenu[1]);
-
-            $colorFooter[$contadorFooter] = isset($colorFooter[$contador]);
+            //Añadimos el color del menu
             $colorFooter[$contadorFooter] = ($datosMenu[2]);
-
-            $urlFooter[$contadorFooter] = isset($urlFooter[$contador]);
+            //Añadimos el url del menu
             $urlFooter[$contadorFooter] = ($datosMenu[3]);
-
-
-            $ordenFooter[$contadorFooter] = isset($ordenFooter[$contador]);
+            //Añadimos el orden del array
             $ordenFooter[$contadorFooter] = $datosMenu[0][1];
 
+            //Aumentamos el indice del menu
             $contadorFooter++;
+            //En caso de que no se introduzca el codigo correcto, mostraremos que esta mal
         } else {
             echo "No se ha introducido el codigo correctamente";
             return false;
         }
-
-        $contador++;
     }
+
+
+    //Cambiamos los colores a ingles, para usarlo con style
     for ($i = 0; $i < count($colorHeader); $i++) {
         if ($colorHeader[$i] == "AZUL") {
             $colorHeader[$i] = "blue";
@@ -114,6 +114,7 @@
         }
     }
 
+    //Cambiamos los colores a ingles, para usarlo con style
     for ($i = 0; $i < count($colorFooter); $i++) {
         if ($colorFooter[$i] == "AZUL") {
             $colorFooter[$i] = "blue";
@@ -126,47 +127,63 @@
         }
     }
 
-    for ($i = 0; $i < count($header); $i++) {
-        echo $header[$contador];
-    }
-
+    //Hacemos el header
     echo "<header style=\"background-color: green;\">";
     for ($i = 0; $i <= count($header); $i++) {
         echo "<h1>";
+        //Usando el como indice la variable de orden, ponemos color, url, header
         echo "<a style=\"color: " . $colorHeader[intval($ordenHeader[$i])] . ";\" href=\"" . $urlHeader[intval($ordenHeader[$i])] . "\">" . $header[intval($ordenHeader[$i])] . "</a>";
         echo "</h1>";
     }
     echo "</header>";
 
+    //Para el grid, creamos las variables
     $maximoAncho = 0;
     $ancho = 0;
     $maximoAltura = 0;
+    //Como el maximo de checkbox que hay son 4
+    //Hacemos dos bucles de 4
+    //Uno para las filas, otros para la anchura
     for ($i = 0; $i < 4; $i++) {
         for ($j = 0; $j < 4; $j++) {
+            //Guardamos el post en una variable para que sea mas legible de usar
             $temporal = $_POST["grid$i$j"];
+            //Si esta marcado, aumentamos el ancho
             if ($temporal == "on") {
                 $ancho++;
             }
         }
+        //Si hay 1 solo checkbox pulsado en una fila, aumentamos la altura
         if ($ancho >= 1) {
             $maximoAltura++;
         }
+        //Si el ancho es mayor al maximo ancho,
+        //Igualamos el valor maximo al de ancho
         if ($maximoAncho < $ancho) {
             $maximoAncho = $ancho;
         }
+        //Reseteamos la variable para poder comprobar fila por fila
         $ancho = 0;
     }
 
 
+    //Creamos la tabla
     echo "<table border=\"1\">";
+    //Usando la altura maxima para las filas
     for ($i = 0; $i < $maximoAltura; $i++) {
         echo "<tr>";
+        //Usando el ancho maximo para las columnas
         for ($j = 0; $j < $maximoAncho; $j++) {
+            //Igualamos la variable color a nada
             $color = "";
+            //Si el checkbox esta pulsado
             if ($_POST["grid$i$j"] == "on") {
+                //Le ponemos color de fondo a esa celda
                 $color = "background-color: gold;";
             }
+            //Creamos la celda, con el color correspondiente
             echo "<td style=\"border: 1px solid black; padding: 5px; $color\" >";
+            //Si el checkbox tiene algo puesto, le añadimos valor
             if ($_POST["grid$i$j"] == "on") {
                 echo "<p>Activastes este boton</p>";
             }
@@ -177,9 +194,11 @@
     echo "</table>";
 
 
+    //Hacemos el footer
     echo "<footer style=\"background-color: green;\">";
     for ($i = 0; $i <= count($footer); $i++) {
         echo "<h1>";
+        //Usando el como indice la variable de orden, ponemos color, url, fooer
         echo "<a style=\"color: " . $colorFooter[intval($ordenFooter[$i])] . ";\" href=\"" . $urlFooter[intval($ordenFooter[$i])] . "\">" . $footer[intval($ordenFooter[$i])] . "</a>";
         echo "</h1>";
     }

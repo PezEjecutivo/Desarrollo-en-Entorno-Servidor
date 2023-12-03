@@ -10,6 +10,7 @@
 </head>
 
 <body>
+    <!--Creamos el formulario-->
     <div class="container" style="padding-top: 20px;">
         <form method="POST" action="./Ejercicio 8 Servidor.php">
             <div class="input-group mb-3">
@@ -18,6 +19,7 @@
             </div>
 
             <?php
+            //Generamos los checkbox
             for ($i = 0; $i < 4; $i++) {
                 for ($j = 0; $j < 4; $j++) {
                     echo "<input type=\"checkbox\" name=\"grid$i$j\" id=\"\">";

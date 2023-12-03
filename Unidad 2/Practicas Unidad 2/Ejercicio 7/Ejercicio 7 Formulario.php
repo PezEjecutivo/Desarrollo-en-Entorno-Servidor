@@ -11,6 +11,7 @@
 
 <body>
 
+    <!--Creamos el formulario-->
     <div class="container" style="padding-top: 20px;">
         <form method="POST" action="./Ejercicio 7 Servidor.php">
             <div class="mb-3">

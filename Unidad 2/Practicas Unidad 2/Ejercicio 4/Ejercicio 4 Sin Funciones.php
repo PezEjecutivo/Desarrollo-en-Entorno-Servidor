@@ -32,34 +32,51 @@
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
       //Con funciones
       $palabra = $_POST["nombre"];
+      //Convertimos la palabra en minusculas
       $palabra = strtolower($palabra);
+      //Como no se pueden usar funciones, creare mi propio explode
+      //Para esto necesitamos un array y una variable para aumenta
+      //el indice del array cada vez que se encuentre un espacio
       $palabrasSeparadas = [""];
       $posicion = 0;
       //Creamos nuestro propio explode
       for ($i = 0; $i < strlen($palabra); $i++) {
 
+        //Si el caracter no es un espacio
         if ($palabra[$i] != " ") {
+          //Concatenamos lo que tenemos en el array, con el caracter correspondiente
           $palabrasSeparadas[$posicion] = $palabrasSeparadas[$posicion] . $palabra[$i];
         } else {
+          //Si el caracter es un espacio, sumamos uno a la posicion 
+          //Es decir, aumentamos el indice del array
           $posicion++;
         }
       }
+
+      //Creamos una variable con todas las consonantes para comprobar las consonantes
       $consonantes = ["q", "w", "r", "t", "y", "p", "s", "d", "f", "g", "h", "j", "k", "l", "ñ", "z", "x", "c", "v", "b", "n", "m"];
       $cantConsonantes = 0;
       $contador = 0;
-      $orden = 0;
       $letras = 0;
 
+      //Hacemos un bucle que vaya por cada palabra separada
       for ($i = 0; $i < count($palabrasSeparadas); $i++) {
+        //Por cada palabra sumamos uno al contador
+        //(meramento estetico)
         $contador++;
-        $orden++;
+        //Hacemos un bucle para recorrer la distancia de palabra
         for ($j = 0; $j < strlen($palabrasSeparadas[$i]); $j++) {
+          //Hacemos un bucle para recorrer todo el array de consonantes
+          //Asi comprobaremos si un caracter es conosonante o no
           for ($k = 0; $k < count($consonantes); $k++) {
+            //Si la letra esta en el array de consonantes
             if ($palabrasSeparadas[$i][$j] == $consonantes[$k]) {
+              //Sumamos uno a la cantidad de consonantes
               $cantConsonantes++;
             }
           }
         }
+        //Lo mostramos por pantalla
         echo "La palabra " . $contador . " de longitud " . strlen($palabrasSeparadas[$i]) . " tiene " . $cantConsonantes . " consonantes<br>";
         $cantConsonantes = 0;
       }

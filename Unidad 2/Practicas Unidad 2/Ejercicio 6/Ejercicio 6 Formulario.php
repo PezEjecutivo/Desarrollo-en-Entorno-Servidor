@@ -10,6 +10,7 @@
 </head>
 
 <body>
+    <!--Formulario entero hecho segun nos pide-->
     <div class="container" style="padding-top: 20px;">
         <form method="POST" action="./Ejercicio 6 Servidor.php">
             <div class="input-group mb-3">

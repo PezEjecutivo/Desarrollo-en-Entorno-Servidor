@@ -18,32 +18,46 @@
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         //Con funciones
         $numeros = $_POST["numeros"];
+
+        //Creamos la funcion que realizara todo el ejercicio
         function dew($numeros, $orden = false)
         {
+            //Separamos los numeros con espacios
             $numeros = explode(" ", $numeros);
+            //Creamos las variables
             $nprimos = 0;
+            //ponemos el numero minimo
             $minimo = min($numeros);
             $media = 0;
+            //Hacemos un bucle para los calculos
             for ($i = 0; $i < count($numeros); $i++) {
+                //Sumamos todos los numeros para la media
                 $media = $media + $numeros[$i];
+                //Hacemos un boolean de si es primo
                 $esPrimo = true;
+                //Hacemos un bucle para saber si es primo
                 for ($j = 1; $j < $numeros[$i]; $j++) {
 
+                    //En caso de que no sea primo, lo ponemos en false
                     if ($numeros[$i] % $j == 0 && $j != $numeros[$i] && $j != 1) {
                         $esPrimo = false;
                     }
                 }
+                //Si es primo, sumamos 1
                 if ($esPrimo) {
                     $nprimos++;
                 }
             }
+            //Dividimos la media entre el numero de numeros
             $media = $media / count($numeros);
 
+            //Creamos el array asociativo
             $arrayNumeros = [
                 "nprimos" => $nprimos,
                 "media" => $media,
                 "minimo" => $minimo
             ];
+            //Lo mostramos de esta forma si tiene algun valor en orden
             if ($orden) {
                 echo "<table>";
                 echo "    <tr>";
@@ -63,6 +77,7 @@
                 echo "        <td>" . $arrayNumeros["minimo"] . "</td>";
                 echo "    </tr>";
                 echo "</table>";
+                //Lo mostramos de otra forma si no tiene nada en orden
             } else {
                 echo "<table>";
                 echo "    <tr>";
