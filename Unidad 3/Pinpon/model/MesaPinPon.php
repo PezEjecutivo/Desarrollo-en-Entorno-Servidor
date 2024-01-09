@@ -18,6 +18,7 @@ class MesaPinPon extends Producto {
         $precio,
         $tamanio);
 
+        
         $this->exterior =$exterior;
         $this->material =$material;
         $this->color =$color;

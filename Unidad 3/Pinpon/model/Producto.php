@@ -1,155 +1,121 @@
-<?php 
+<?php
+
+namespace PINPON\model;
+
+use PDOException;
 
 class Producto
 {
 
-    //Si utilizamos private solo se puede utilizar desde dentro de la clase
-
-    //Protected implica que se puede acceder a ella solo desde su propia clase
-    //y sus clases hijas
-    private $id;
-    private $nombre;
-    private $descripcion;
-    private $peso;
-    private $precio;
-    private $tamanio;
-
-    //Las variables estaticas se utilizan para compartir valores entre todos los objetos
-    public static $cantidad=0;
-
-    //declaramos estaticos los metodos que podamos utilizar
-    //sin necesidad de utilizar un objeto de este tipo
-    public static function incrementarCantidad()
-    {
-        self::$cantidad++;
-    }
 
     /**
-     * Constructor de la clase
+     * Devuelve un array asociativo con todos los datos
+     * de la tabla productos
      */
-    public function __construct($id, $nombre,$descripcion,$peso,$precio,$tamanio)
+    public static function getProductos($pdo)
     {
-        //Cada vez que se crea un objeto incrementamos el contador de objetos de este tipo
-        self::$cantidad++;
 
-       if (isset($id)) $this->id=$id; else $this->id = 0;
-       if (isset($nombre)) $this->nombre=$nombre; else $this->nombre = "";
-       if (isset($descripcion)) $this->descripcion=$descripcion; else $this->descripcion="";
-       if (isset($peso)) $this->peso=$peso; else $this->peso = random_int(1,5);
-       if (isset($precio)) $this->precio=$precio; else$this->precio= random_int(1,5);
-       if (isset($tamanio)) $this->tamanio=$tamanio; else$this->tamanio = random_int(1,5);
-    }
+        try {
+            //Realizamos una query
+            $query = "SELECT * FROM productos";
 
+            $resultado = $pdo->query($query);
 
-
-    public function get_id() :int 
-    {
-        return $this->id;
-    } 
-
-
-    /**
-     * Get the value of nombre
-     */ 
-    public function getNombre()
-    {
-        return $this->nombre;
+            //FetchAll nos saca todos los registros de la query
+            //El fetchall no se puede utilizar mas de una vez
+            $resulSet = $resultado->fetchAll();
+        } catch (PDOException $e) {
+            print "¡Error!: " . $e->getMessage() . "<br/>";
+            die();
+        }
+        //Devolvemos los datos de la query
+        return $resulSet;
     }
 
     /**
-     * Set the value of nombre
-     *
-     * @return  self
-     */ 
-    public function setNombre($nombre)
+     * La funcion borra el producto con el id_producto que recibimos
+     */
+    public static function delProducto($pdo, $id_producto)
     {
-        $this->nombre = $nombre;
+        try {
+            //Borramos todos los productos con nombre Pala bullpadel 2
+            $query = "DELETE from productos where nombre=:nombre";
 
-        return $this;
+            //Perparamos la ejecucion de la sentencia (statement stmt)
+            $stmt = $pdo->prepare($query);
+
+            //Asociamos el valor del parametro idproducto a la posicicion de :id
+            $stmt->bindValue(':id', $id_producto);
+
+            $stmt->execute();
+
+            $filas_afectadas = $stmt->rowCount();
+
+            return $filas_afectadas;
+        } catch (PDOException $e) {
+            print "¡Error!: " . $e->getMessage() . "<br/>";
+            die();
+        } finally {
+            $pdo = null;
+        }
     }
 
-    /**
-     * Get the value of descripcion
-     */ 
-    public function getDescripcion()
+    public static function updateProducto($pdo, $producto)
     {
-        return $this->descripcion;
-    }
+        //Query para modificar 
+        $query = "UPDATE productos SET ";
 
-    /**
-     * Set the value of descripcion
-     *
-     * @return  self
-     */ 
-    public function setDescripcion($descripcion)
-    {
-        $this->descripcion = $descripcion;
+        //Si no nos meten nada para modificar, devolvmos error
+        if (count($producto) == 0) {
+            return -1;
+        }
 
-        return $this;
-    }
+        if ($producto["nombre"] != null) {
+            $query = $query . "nombre=:nombre";
+        }
 
-    /**
-     * Get the value of peso
-     */ 
-    public function getPeso()
-    {
-        return $this->peso;
-    }
+        if ($producto["descripcion"] != null) {
+            //Si la cadena de la query tiene mas que la inicial
+            //significa que tiene un campo modificado 
+            //y tenemos que añadir , a la query
+            if (strlen($query) > 20) {
+                $query = $query . ", ";
+            }
+            $query = $query . "descripcion=:descripcion";
+        }
 
-    /**
-     * Set the value of peso
-     *
-     * @return  self
-     */ 
-    public function setPeso($peso)
-    {
-        $this->peso = $peso;
+        if ($producto["peso"] != null) {
+            if (strlen($query) > 20) {
+                $query = $query . ", ";
+            }
+            $query = $query . "peso=:peso";
+        }
 
-        return $this;
-    }
+        if ($producto["precio"] != null) {
+            if (strlen($query) > 20) {
+                $query = $query . ", ";
+            }
+            $query = $query . "precio=:precio";
+        }
 
-    /**
-     * Get the value of precio
-     */ 
-    public function getPrecio()
-    {
-        return $this->precio;
-    }
+        if ($producto["tamano"] != null) {
+            if (strlen($query) > 20) {
+                $query = $query . ", ";
+            }
+            $query = $query . "tamano=:tamano";
+        }
 
-    /**
-     * Set the value of precio
-     *
-     * @return  self
-     */ 
-    public function setPrecio($precio)
-    {
-        $this->precio = $precio;
+        if ($producto["id"] != null) {
+            $query = $query . " WHERE id=:id";
+        }
 
-        return $this;
-    }
-    
+        $stmt = $pdo->prepare($query);
 
-    /**
-     * Get the value of tamanio
-     */ 
-    public function getTamanio()
-    {
-        return $this->tamanio;
-    }
+        $stmt->bindValue(':precio', 20);
 
-    /**
-     * Set the value of tamanio
-     *
-     * @return  self
-     */ 
-    public function setTamanio($tamanio)
-    {
-        $this->tamanio = $tamanio;
+        $stmt->execute();
 
-        return $this;
+        //Sacamos la cantidad de filas afectadas
+        $cuenta = $stmt->rowCount();
     }
 }
-
-
-
-?>

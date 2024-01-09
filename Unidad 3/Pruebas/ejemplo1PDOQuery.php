@@ -130,7 +130,7 @@ try {
     echo "<br/>Se ha rebajado el precio, han sido afectadas $cuenta";
 
     //Borramos todos los productos con nombre Pala bullpadel 2
-    $query ="delete from productos where nombre=:nombre";
+    $query ="DELETE from productos where nombre=:nombre";
 
     $stmt = $pdo->prepare($query);
 
