@@ -39,7 +39,7 @@ class Producto
     {
         try {
             //Borramos todos los productos con nombre Pala bullpadel 2
-            $query = "DELETE from productos where nombre=:nombre";
+            $query = "DELETE from productos where idProductos=:id";
 
             //Perparamos la ejecucion de la sentencia (statement stmt)
             $stmt = $pdo->prepare($query);

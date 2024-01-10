@@ -5,6 +5,9 @@ namespace controller;
 use PINPON\model\Producto as ModelProducto;
 use PINPON\model\Utils as ModelUtils;
 
+include("../model/Producto.php");
+include("../model/Utils.php");
+
 session_start();
 
 $_SESSION["user"] = "pedro";
@@ -22,6 +25,9 @@ if (isset($_SESSION["user"])) {
 
     //Eliminamos el producto
     ModelProducto::delProducto($pdo, $idProd);
+
+    //Cargamos los datos de los productos
+    $datosProducto = ModelProducto::getProductos($pdo);
 
     //Cargamos la vista principal
     include("../view/MostrarProductos.php");

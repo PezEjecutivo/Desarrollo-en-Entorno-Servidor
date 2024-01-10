@@ -38,14 +38,33 @@
                         print("<td>" . $datosProducto[$i][$j] . "</td>\n");
                     }
                     //Boton para modificar el producto
-                    print("<td>Modificar</td>");
+                    print("<form action=VerProducto.php method=POST>\n");
+                    print("<input type='hidden' name='accion' value='Modificar'>\n");
+                    print("<input type=hidden name='idProducto' value='" . $datosProducto[$i]['idProductos'] . "'>\n");
+                    print("<input type=hidden name='nombre' value='" . $datosProducto[$i]['nombre'] . "'>\n");
+                    print("<input type=hidden name='descripcion' value='" . $datosProducto[$i]['descripcion'] . "'>\n");
+                    print("<input type=hidden name='peso' value='" . $datosProducto[$i]['peso'] . "'>\n");
+                    print("<input type=hidden name='precio' value='" . $datosProducto[$i]['precio'] . "'>\n");
+                    print("<input type=hidden name='tamano' value='" . $datosProducto[$i]['tamano'] . "'>\n");
+                    print("<td><button type=submit>Modificar</button></td>\n");
+                    print("</form>\n");
+
                     //Boton para eliminar el producto
-                    print("<td>Eliminar</td>");
+                    print("<form action=EliminarDatosController.php method=POST>\n");
+                    print("<input type=hidden name='idProducto' value='" . $datosProducto[$i]['idProductos'] . "'>\n");
+                    print("<td><button type=submit>Eliminar</button></td>\n");
+                    print("</form>\n");
+
                     print("</tr>\n");
                 }
                 ?>
             </tbody>
         </table>
+
+        <form action="VerProducto.php" method="post">
+            <input type="hidden" name="accion" value="Insertar">
+            <button type="submit">Añadir Producto</button>
+        </form>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>

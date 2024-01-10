@@ -7,8 +7,8 @@ use model\Utils;
 use PINPON\model\Utils as ModelUtils;
 use PINPON\model\Producto as ModelProducto;
 
-include("model\Producto.php");
-include("model\Utils.php");
+include("..\model\Producto.php");
+include("..\model\Utils.php");
 
 session_start();
 
@@ -26,7 +26,7 @@ if (isset($_SESSION["user"])) {
     $datosProducto = ModelProducto::getProductos($pdo);
 
     //Cargamos la vista
-    include("view/MostrarProductos.php");
+    include("../view/MostrarProductos.php");
 } else {
     include("view/Login.php");
 }

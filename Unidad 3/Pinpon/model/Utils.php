@@ -14,7 +14,7 @@ class Utils
     public static function conectar()
     {
         //Cargamos las variables de conexion
-        include("../settings.inc");
+        include("..\settings.inc");
 
         try {
             //Nos conectamos a la base de datos utilizando PDO con la cadena de conexion
