@@ -20,6 +20,7 @@
         </form>
 
         <?php
+        error_reporting(E_ERROR | E_PARSE);
         $lista = $_POST["lista"];
 
         function calcularTipo($lista)
