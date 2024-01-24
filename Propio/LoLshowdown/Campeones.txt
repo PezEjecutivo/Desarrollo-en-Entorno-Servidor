@@ -1,0 +1,73 @@
+Caitlyn - Piltover
+Miss Fortune - Aguas estancadas
+Lux - Demacia
+Ezreal - Piltover
+Jhin - Jonia
+Yone - Jonia
+Yasuo - Jonia
+Lucian - Demacia, Islas de la sombra
+Kaisa - Shurima, vacio
+Ashe - Freljord
+Akali - Jonia
+Jax - Icathia, Runaterra, Shurima
+Lee Sin - Jonia
+Sylas - Demacia, Freljord
+Vayne - Demacia
+Brand - Freljord, Runaterra
+Aatrox - Runaterra, Shurima
+Nocturne - Runaterra
+Trundle - Freljord
+Senna - Islas de la sombra
+Jinx - Zaun
+Teemo - Bandle
+Thresh - Islas de la sombra
+Morgana - Demacia, Targon
+Kayn - Jonia, Noxus, Runaterra, Shurima
+Xerath - Shurima
+Nautilus - Aguas estancadas
+Samira - Noxus, Shurima
+Graves - Aguas estancadas
+Varus - Jonia, Runaterra, Shurima
+Mordekaiser - Noxus, Islas de la sombra
+Ekko - Zaun
+Zed - Jonia
+Maestro Yi - Jonia
+Fizz - Aguas estancadas
+Blitzcrank - Zaun
+Malphite - Ixtal, Shurima
+Shaco - Runaterra
+Pantheon - Targon
+Diana - Targon
+Viego - Islas de la sombra
+Irelia - Jonia
+Garen - Demacia
+Katarina - Noxus
+Briar - Noxus
+Darius - Noxus
+Zyra - Ixtal
+Leona - Targon
+Kha Zix - Vacio
+Rakan - Jonia
+Warwick - Zaun
+Singed - Piltover, Zaun
+Kog maw - Vacio
+Kaisa - Shurima, Vacio
+Reksai - Shurima, Vacio
+Kassadin - Shurima, Vacio
+Viktor - Piltover, Zaun
+Jayce - Piltover
+Seraphine - Piltover, Zaun
+Vi - Piltover, Zaun
+Pyke - Aguas estancadas
+Gangplank - Aguas estancadas
+Qiyana - Ixtal 
+Neeko - Ixtal
+Rengar - Shurima, Ixtal
+Nidalee - Ixtal
+Lissandra - Freljord
+Anivia - Freljord
+Yuumi - Bandle
+Tristana - Bandle
+Rumble - Bandle
+Veigar - Bandle, Islas de la sombra
+Aurelion Sol - Runaterra, Targon
